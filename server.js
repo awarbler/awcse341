@@ -1,6 +1,12 @@
 const express= require('express');
-const app = express()
-const port = 3000
+
+const connectDB = require('./DB/connect');
+const app = express();
+
+
+connectDB();
+const port = process.env.Port || 3000
+
 
 app.use('/', require('./routes'))
 
