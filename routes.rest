@@ -1,0 +1,7 @@
+// LOCALHOST 
+### 
+GET http://localhost:8080/contacts
+### 
+GET http://localhost:8080/contacts?firstName=Test
+// Deployed Requests 
+GET http://localhost:8080/contacts 
