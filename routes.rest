@@ -1,18 +1,27 @@
-// LOCALHOST 
-### 
-GET http://localhost:8080/contacts
+// Local Requests 
+// Index 
+GET http://localhost:8080/contacts 
 ### 
 GET http://localhost:8080/contacts?firstName=Test
+### 
+GET http://localhost:8080/contacts/632d64819d61501ab78908f3
+
+
+### 
+GET http://localhost:8080/contacts/632d64819d61501ab78908f3 
+### 
+GET http://localhost:8080/contacts/632d64819d61501ab78908f4  
+### 
+###
+GET http://localhost:8080/contacts/632d64819d61501ab78908f2
+
+
 // Deployed Requests 
+###
 GET http://localhost:8080/contacts 
+### 
+GET http://localhost:8080/contacts?firstName=Test
 
-// Show ### 
-GET http://localhost:8080/contacts/632d64819d61501ab78908f2
-
-// Deployed Requests
- GET http://localhost:8080/contacts 
- ### 
- GET http://localhost:8080/contacts?firstName=Test
-
-// Show ### 
-GET http://localhost:8080/contacts/632d64819d61501ab78908f2
+// Show 
+### 
+GET http://localhost:8080/contacts/632d64819d61501ab78908f3
