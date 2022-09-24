@@ -13,7 +13,7 @@ const getSingle = async (req, res, next) => {
   const userId = new ObjectId(req.params.id);
   const result = await mongodb
     .getDb()
-    .db()
+    .db('CSE341AW')
     .collection('contacts')
     .find({ _id: userId });
   result.toArray().then((lists) => {
@@ -21,5 +21,7 @@ const getSingle = async (req, res, next) => {
     res.status(200).json(lists[0]);
   });
 };
+
+
 
 module.exports = { getAll, getSingle };
