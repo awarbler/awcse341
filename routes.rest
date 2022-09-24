@@ -5,3 +5,14 @@ GET http://localhost:8080/contacts
 GET http://localhost:8080/contacts?firstName=Test
 // Deployed Requests 
 GET http://localhost:8080/contacts 
+
+// Show ### 
+GET http://localhost:8080/contacts/632d64819d61501ab78908f2
+
+// Deployed Requests
+ GET http://localhost:8080/contacts 
+ ### 
+ GET http://localhost:8080/contacts?firstName=Test
+
+// Show ### 
+GET http://localhost:8080/contacts/632d64819d61501ab78908f2
