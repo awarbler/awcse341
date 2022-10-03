@@ -8,10 +8,10 @@ router.get('/', contactsController.getAll);
 
 router.get('/:id', contactsController.getSingle);
 
-// List a single contact
-// router.use("/:id", show);
+router.post('/', contactsController.createContact);
+// request made hand by this function
+router.put('/:id', contactsController.updateContact);
 
-// List all contacts
-// router.use("/", index);
+router.delete('/:id', contactsController.deleteContact);
 
 module.exports = router;

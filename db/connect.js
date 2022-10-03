@@ -2,6 +2,11 @@ const dotenv = require('dotenv');
 dotenv.config();
 const MongoClient = require('mongodb').MongoClient;
 
+// example MongoClient.connect(connectionString, { useUnifiedTopology: true })
+// .then(client => {
+//   console.log('Connected to Database')
+//   const db = client.db('star-wars-quotes')
+// })
 let _db;
 
 const initDb = (callback) => {
@@ -28,5 +33,5 @@ const getDb = () => {
 
 module.exports = {
   initDb,
-  getDb,
+  getDb
 };
