@@ -2,6 +2,7 @@ const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res) => {
+  // #swagger.description = 'Get all contacts'
   const result = await mongodb.getDb().db('CSE341AW').collection('contacts').find();
   result.toArray().then((lists) => {
     res.setHeader('Content-Type', 'application/json');
@@ -10,6 +11,7 @@ const getAll = async (req, res) => {
 };
 
 const getSingle = async (req, res) => {
+  // #swagger.description = 'Get single contacts'
   const userId = new ObjectId(req.params.id);
   const result = await mongodb.getDb().db('CSE341AW').collection('contacts').find({ _id: userId });
   result.toArray().then((lists) => {
@@ -20,6 +22,7 @@ const getSingle = async (req, res) => {
 
 const createContact = async (req, res) => {
   const contact = {
+    // #swagger.description = 'create contact'
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
@@ -39,6 +42,7 @@ const updateContact = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   // be aware of updateOne if you only want to update specific fields
   const contact = {
+    // #swagger.description = 'Update contacts'
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     email: req.body.email,
