@@ -15,17 +15,25 @@ const getAll = async (req, res) => {
     });
 };
 
-const getSingle = async (req, res) => {
+const getSingle = (req, res) => {
   // #swagger.description = 'Get single contacts'
+  //validate object id
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('must us a valid contact id to fina a contact.');
+  }
   const userId = new ObjectId(req.params.id);
-  const result = await mongodb.getDb().db('CSE341AW').collection('contacts').find({ _id: userId });
-  result.toArray().then((lists) => {
-    if (err) {
-      res.status(400).json({ message: err });
-    }
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists[0]);
-  });
+  mongodb
+    .getDb()
+    .db('CSE341AW')
+    .collection('contacts')
+    .find({ _id: userId })
+    .toArray((err, result) => {
+      if (err) {
+        res.status(400).json({ message: err });
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(result[0]);
+    });
 };
 
 const createContact = async (req, res) => {
@@ -48,6 +56,10 @@ const createContact = async (req, res) => {
 };
 
 const updateContact = async (req, res) => {
+  //validate object id
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('must us a valid contact id to fina a contact.');
+  }
   const userId = new ObjectId(req.params.id);
   // be aware of updateOne if you only want to update specific fields
   const contact = {
@@ -64,7 +76,7 @@ const updateContact = async (req, res) => {
     .collection('contacts')
     .replaceOne({ _id: userId }, contact);
   console.log(response);
-  // error handler here 
+  // error handler here
   if (response.modifiedCount > 0) {
     res.status(204).send();
   } else {
@@ -73,6 +85,10 @@ const updateContact = async (req, res) => {
 };
 
 const deleteContact = async (req, res) => {
+  //validate object id
+  if (!ObjectId.isValid(req.params.id)) {
+    res.status(400).json('must us a valid contact id to fina a contact.');
+  }
   const userId = new ObjectId(req.params.id);
   const response = await mongodb
     .getDb()
