@@ -1,13 +1,18 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
+// change go to error handle
 const getAll = async (req, res) => {
   // #swagger.description = 'Get all contacts'
-  const result = await mongodb.getDb().db('CSE341AW').collection('contacts').find();
-  result.toArray().then((lists) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(lists);
-  });
+  mongodb
+    // eslint-disable-next-line prettier/prettier
+  .getDb().db('CSE341AW').collection('contacts').find().toArray((err,lists) => {
+      if (err) {
+        res.status(400).json({ message: err });
+      }
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(lists);
+    });
 };
 
 const getSingle = async (req, res) => {
@@ -15,6 +20,9 @@ const getSingle = async (req, res) => {
   const userId = new ObjectId(req.params.id);
   const result = await mongodb.getDb().db('CSE341AW').collection('contacts').find({ _id: userId });
   result.toArray().then((lists) => {
+    if (err) {
+      res.status(400).json({ message: err });
+    }
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(lists[0]);
   });
@@ -31,6 +39,7 @@ const createContact = async (req, res) => {
   };
 
   const response = await mongodb.getDb().db('CSE341AW').collection('contacts').insertOne(contact);
+  // error handler here
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
@@ -55,6 +64,7 @@ const updateContact = async (req, res) => {
     .collection('contacts')
     .replaceOne({ _id: userId }, contact);
   console.log(response);
+  // error handler here 
   if (response.modifiedCount > 0) {
     res.status(204).send();
   } else {
